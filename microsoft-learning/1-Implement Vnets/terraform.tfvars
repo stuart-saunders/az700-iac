@@ -1,4 +1,4 @@
-resource_name_prefix = "mslearn-vnets"
+resource_name_prefix = "az700-lab1"
 location = "East US"
 
 vnets = {
