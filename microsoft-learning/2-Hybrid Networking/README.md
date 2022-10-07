@@ -4,6 +4,7 @@ https://learn.microsoft.com/en-us/training/modules/design-implement-hybrid-netwo
 
 Additional files referenced in the Module available here:-
 https://github.com/MicrosoftLearning/AZ-700-Designing-and-Implementing-Microsoft-Azure-Networking-Solutions/blob/master/Instructions/Exercises/M02-Unit%203%20Create%20and%20configure%20a%20virtual%20network%20gateway.md
+
 https://github.com/MicrosoftLearning/AZ-700-Designing-and-Implementing-Microsoft-Azure-Networking-Solutions/tree/master/Allfiles/Exercises/M02
 
 The exercises in this module require the creation of the Azure resources to support a fictional organisation's networking scenario. The organisation requires:-
