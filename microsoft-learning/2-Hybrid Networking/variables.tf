@@ -57,6 +57,21 @@ variable "network_gateway_connection_shared_key" {
   description = "The shared IPSec key"
 }
 
+# Virtual WAN
+variable "virtual_wan_type" {
+  type = string
+  description = "Specifies the Virtual WAN type"
+  default = "Standard"
+}
+
+variable "vhub" {
+  type = object({
+    location         = string
+    address_prefix   = string
+    vnet_connections = set(string)
+  })
+}
+
 # Key Vault
 variable "kv_secret_permissions_full" {
   type        = list(string)

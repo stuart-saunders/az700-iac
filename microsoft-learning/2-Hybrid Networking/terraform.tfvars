@@ -59,6 +59,7 @@ vnets = {
     address_space = "10.40.0.0/16"
     network_gateway = false
     network_gateway_connections = [ ]
+    virtual_hub_connecions = [ "" ]
     subnets = {
       ResearchSystemSubnet = {
         address_space = "10.40.0.0/24"
@@ -69,3 +70,9 @@ vnets = {
 }
 
 network_gateway_connection_shared_key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+
+vhub = {
+  location = "West US"
+  address_prefix = "10.60.0.0/24"
+  vnet_connections = [ "ResearchVnet" ]
+}

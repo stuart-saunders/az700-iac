@@ -25,6 +25,7 @@ resource "azurerm_public_ip" "this" {
   allocation_method            = "Dynamic"
 }
 
+# Virtual Network Gateway
 resource "azurerm_virtual_network_gateway" "this" {
   for_each = local.network_gateways
 
@@ -59,4 +60,35 @@ resource "azurerm_virtual_network_gateway_connection" "this" {
   peer_virtual_network_gateway_id = azurerm_virtual_network_gateway.this[each.value.peer].id
 
   shared_key = var.network_gateway_connection_shared_key
+}
+
+# Virtual WAN
+resource "azurerm_virtual_wan" "this" {
+  name                = "${var.resource_name_prefix}-vwan"
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
+  type                = var.virtual_wan_type
+}
+
+resource "azurerm_virtual_hub" "this" {
+  name                = "${var.resource_name_prefix}-vhub"
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
+  virtual_wan_id      = azurerm_virtual_wan.this.id
+  address_prefix      = var.vhub.address_prefix
+}
+
+resource "azurerm_vpn_gateway" "this" {
+  name                = "${var.resource_name_prefix}-vpngw"
+  location            = azurerm_resource_group.this.location
+  resource_group_name = azurerm_resource_group.this.name
+  virtual_hub_id      = azurerm_virtual_hub.this.id
+}
+
+resource "azurerm_virtual_hub_connection" "this" {
+  for_each = var.vhub.vnet_connections
+
+  name                      = "vhub-to-${each.value}"
+  virtual_hub_id            = azurerm_virtual_hub.this.id
+  remote_virtual_network_id = azurerm_virtual_network.this[each.value].id
 }
